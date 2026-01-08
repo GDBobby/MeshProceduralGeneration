@@ -19,6 +19,7 @@ echo "2 - Ninja"
 echo "3 - Ninja Multi-Config"
 echo "4 - Xcode (macOS only)"
 echo "5 - Visual Studio 17 2022 (Windows only, cross-compiling)"
+echo "6 - Visual Studio 18 2026 (Windows only, cross-compiling)"
 echo "Custom (enter a different generator name) "
 read -p "Enter CMake generator [default: Unix Makefiles]: " userGenerator
 
@@ -39,6 +40,9 @@ if [ -n "$userGenerator" ]; then
             ;;
         5)
             generator="Visual Studio 17 2022"
+            ;;
+        6)
+            generator="Visual Studio 18 2026"
             ;;
         *)
             # If the input is not a number between 1-5, use it as a custom generator name

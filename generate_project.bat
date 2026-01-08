@@ -17,7 +17,8 @@ if errorlevel 1 (
 REM Display generator options
 echo Select the CMake generator to use (default: "%defaultGenerator%"):
 echo 1 - Visual Studio 17 2022 (default)
-echo 2 - Ninja
+echo 2 - Visual Studio 18 2026
+echo 3 - Ninja
 echo Custom (enter a different generator name)
 
 REM Prompt user for generator
@@ -27,6 +28,8 @@ REM Handle the user's choice
 if "%userChoice%"=="1" (
     set "generator=Visual Studio 17 2022"
 ) else if "%userChoice%"=="2" (
+	set "generator=Visual Studio 18 2026"
+) else if "%userChoice%"=="3" (
     set "generator=Ninja Multi-Config"
 ) else if defined userChoice (
     REM If the user doesn't input a valid number, treat their input as the generator name
@@ -39,7 +42,7 @@ if not defined generator (
 )
 
 REM Run CMake
-echo Running CMake to generate Visual Studio 2022 solution...
+echo Running CMake to generate "%generator%" solution...
 cmake -S %sourceDir% -B %buildDir% -G "%generator%" -D "ONYX_BUILD_EDITOR=ON" -D "projectName=%projectName%" -D CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 REM Check if CMake succeeded
@@ -51,3 +54,5 @@ if %errorlevel% equ 0 (
 )
 
 endlocal
+
+pause

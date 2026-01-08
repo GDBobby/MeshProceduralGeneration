@@ -14,7 +14,8 @@ if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
 Write-Host "Select the CMake generator to use (default: $defaultGenerator):"
 Write-Host "Common options:"
 Write-Host "1 - Visual Studio 17 2022 (default)"
-Write-Host "2 - Ninja"
+Write-Host "2 - Visual Studio 18 2026"
+Write-Host "3 - Ninja"
 Write-Host "Custom (enter a different generator name)"
 $generatorChoice = Read-Host "Enter CMake generator or a custom generator name."
 if ($generatorChoice)
@@ -23,7 +24,8 @@ if ($generatorChoice)
     switch ($generatorChoice)
     {
         "1" { $generator = "Visual Studio 17 2022" }
-        "2" { $generator = "Ninja" }
+		"2" { $generator = "Visual Studio 18 2026" }
+        "3" { $generator = "Ninja" }
         default
         { 
             $generator = $generatorChoice  # If input is not a valid number, treat it as a generator name
@@ -47,7 +49,7 @@ if (!(Test-Path $buildDir)) {
 }
 
 # Run CMake
-Write-Host "Running CMake to generate Visual Studio 2022 solution..."
+Write-Host "Running CMake to generate `"$generator`" solution..."
 cmake -S "`"$sourceDir`"" -B "`"$buildDir`"" -G "`"$generator`"" -D "ONYX_BUILD_EDITOR=ON" -D "projectName=$projectName"
 
 # Check if CMake succeeded

@@ -3,7 +3,14 @@
 #
 cmake_minimum_required (VERSION 3.28)
 
-set(ONYX_GAME_PROJECT_NAME "myproject" CACHE STRING "Project Name")
+set(ONYX_GAME_PROJECT_NAME "MeshProceduralGeneration" CACHE STRING "Project Name")
+if(projectName)
+    message(STATUS "projectName - ${projectName}")
+else()
+    set(projectName ${ONYX_GAME_PROJECT_NAME} CACHE)
+    message(STATUS "projectName - ${projectName}")
+endif()
+
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
